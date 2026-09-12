@@ -20,7 +20,7 @@
     for(const c of caps)if(!c.retired&&(c.x<C.radius||c.x>C.width-C.radius||c.y<C.radius||c.y>C.length-C.radius)){c.retired=true;c.reason='경계 밖';c.vx=c.vy=0;}
     return caps.some(c=>!c.retired&&Math.hypot(c.vx,c.vy)>0);
   }
-  function settle(caps){for(const c of caps)if(!c.retired&&c.y>C.line){c.retired=true;c.reason='기준선 미달';}return caps.filter(c=>!c.retired).sort((a,b)=>a.y-b.y);}
+  function settle(caps,final=false){if(final)for(const c of caps)if(!c.retired&&c.y>C.line){c.retired=true;c.reason='기준선 미달';}return caps.filter(c=>!c.retired).sort((a,b)=>a.y-b.y);}
   function distance(c){return Math.max(0,(C.start-c.y)/100);}
   const api={C,step,settle,distance};if(typeof module!=='undefined')module.exports=api;root.CapPhysics=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

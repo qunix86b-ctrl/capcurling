@@ -44,7 +44,8 @@ test('20 players have artwork, take turns and appear in final results',()=>{
   assert.equal(vm.runInContext('phase',context),'finished');
   const result=element('rankedPlayers').innerHTML+element('retiredPlayers').innerHTML;
   assert.equal((result.match(/class="score-row"/g)||[]).length,20);
-  assert.ok(result.includes('선수 20'));
+  assert.ok(result.includes('Player 20'));
+  assert.ok(!result.includes('선수 20'));
   assert.ok(!result.includes('undefined'));
   assert.equal(element('resultsPanel').hidden,false);
   element('resultRestart').onclick();
