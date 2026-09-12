@@ -5,6 +5,7 @@
       "firebase.json",
       ".firebaserc",
       ".firebase/**",
+      ".gitignore",
       ".git/**",
       ".github/**",
       "firebase-debug.log",
