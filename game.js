@@ -29,7 +29,8 @@ canvas.addEventListener('pointerdown',e=>{
   if(e.button!==0||fieldPointer!==null||$('helpDialog').open)return;
   if(phase==='finished')return;
   if(!['place','aim','power'].includes(phase))return;
-  e.preventDefault();canvas.focus({preventScroll:true});
+  e.preventDefault();
+  if(e.pointerType!=='touch')canvas.focus({preventScroll:true});
   if(phase==='place'){
     const p=worldPoint(e);
     if(p.x<C.radius+5||p.x>C.width-C.radius-5||p.y<2230||p.y>2440)return;
