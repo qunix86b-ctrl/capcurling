@@ -41,6 +41,11 @@
 - `terms.html`: 서비스 이용약관
 - `contact.html`: 운영자 및 문의 안내
 - `info.css`: 정보 페이지 공통 반응형 디자인
+- `assets/capcurling.png`: 사용자가 제공한 CapCurling 병뚜껑 아이콘 원본
+- `assets/favicon-32.png`: 원본에서 생성한 브라우저 탭 아이콘
+- `assets/apple-touch-icon.png`: 원본에서 생성한 iPhone·iPad 홈 화면 바로가기 아이콘
+- `assets/icon-192.png`, `assets/icon-512.png`: 원본에서 생성한 Android 및 설치형 웹 앱 아이콘
+- `site.webmanifest`: 홈 화면 바로가기 이름, 색상 및 아이콘 설정
 
 병뚜껑은 금속 톱니, 반사광, 브랜드별 인쇄를 SVG로 직접 그린 그래픽이며, 브랜드의 공식 이미지 파일은 사용하지 않습니다.
 
