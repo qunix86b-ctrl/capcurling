@@ -13,9 +13,9 @@ function start(){players=Array.from({length:count},(_,id)=>({id}));caps=[];turn=
 function beginTurn(){angle=0;power=0;osc=0;camera=targetCamera=1700;overview=false;updateViewButton();$('powerFill').style.width='0%';$('powerValue').textContent='0%';$('meterLabel').textContent='SHOT POWER';setPhase('place');window.scrollTo({top:0,behavior:'instant'});}
 function finish(){
   const ranked=settle(caps,true),best=ranked[0],winners=best?ranked.filter(c=>distance(c).toFixed(2)===distance(best).toFixed(2)):[];
-  const retired=caps.filter(c=>c.retired).sort((a,b)=>a.id-b.id);
+  const retired=caps.filter(c=>c.retired||c.qualified===false).sort((a,b)=>a.id-b.id);
   $('resultSummary').textContent=best?`${winners.map(c=>`Player ${c.id+1}`).join(' · ')} ${winners.length>1?'공동 우승!':'우승!'}`:'이번 경기는 모두 리타이어했어요.';
-  function row(c,rank){return `<div class="score-row"><b class="rank">${rank}</b>${icon(c.id)}<div class="score-name">Player ${c.id+1}<small>${designs[c.id%designs.length].name}</small></div><strong class="score-value ${c.retired?'retired':''}">${c.retired?c.reason:distance(c).toFixed(2)+' m'}</strong></div>`;}
+  function row(c,rank){const failed=c.retired||c.qualified===false;return `<div class="score-row"><b class="rank">${rank}</b>${icon(c.id)}<div class="score-name">Player ${c.id+1}<small>${designs[c.id%designs.length].name}</small></div><strong class="score-value ${failed?'retired':''}">${failed?c.reason:distance(c).toFixed(2)+' m'}</strong></div>`;}
   $('rankedPlayers').innerHTML=ranked.length?ranked.map(c=>row(c,1+ranked.filter(other=>Number(distance(other).toFixed(2))>Number(distance(c).toFixed(2))).length)).join(''):'<p class="empty-result">기록을 인정받은 선수가 없습니다.</p>';
   $('retiredSection').hidden=!retired.length;
   $('retiredPlayers').innerHTML=retired.map(c=>row(c,'—')).join('');
