@@ -1,7 +1,7 @@
 'use strict';
 const $=id=>document.getElementById(id),{C,step,settle,distance}=CapPhysics;
 const MAX_PLAYERS=20;
-const designs=[{name:'코카콜라',label:'Cola',color:'#ce3d31',sub:'ORIGINAL'},{name:'칠성사이다',label:'칠성',color:'#22865e',sub:'CIDER'},{name:'환타 오렌지',label:'Fanta',color:'#ef962e',sub:'ORANGE'},{name:'펩시',label:'PEPSI',color:'#386bac',sub:'COLA'},{name:'웰치스 포도',label:'Welch’s',color:'#825092',sub:'GRAPE'},{name:'밀키스',label:'밀키스',color:'#5bb1c1',sub:'MILK SODA'},{name:'레몬 소다',label:'LEMON',color:'#c4ab34',sub:'SPARKLING'},{name:'체리 소다',label:'CHERRY',color:'#c66389',sub:'SODA'}];
+const designs=[{name:'코카콜라'},{name:'칠성사이다'},{name:'환타 오렌지'},{name:'펩시'},{name:'웰치스 포도'},{name:'밀키스'},{name:'레몬 소다'},{name:'체리 소다'},{name:'자몽 토닉'},{name:'블루 레몬에이드'},{name:'진저에일'},{name:'루트비어'},{name:'크림소다'},{name:'콜드브루'},{name:'복숭아 아이스티'},{name:'청포도 소다'},{name:'자두 소다'},{name:'오렌지 크림'},{name:'라임 토닉'},{name:'바닐라 콜라'}];
 let count=2,players=[],caps=[],turn=0,phase='setup',holding=false,angle=0,power=0,osc=0,overview=false,camera=1700,targetCamera=1700,lastTime=0,accumulator=0,settledTime=0;
 const canvas=$('game'),ctx=canvas.getContext('2d');let w=0,h=0,scale=1,ox=0,viewHeight=900;
 function icon(i){return `<span class="numbered-cap"><img class="cap-icon" src="${capTextures[i%capTextures.length].src}" alt="${designs[i%designs.length].name} 병뚜껑"><span class="cap-number">${i+1}</span></span>`;}

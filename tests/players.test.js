@@ -4,6 +4,14 @@ const vm=require('node:vm');
 const fs=require('node:fs');
 const path=require('node:path');
 
+test('cap artwork provides 20 distinct textures',()=>{
+  const context=vm.createContext({Image:class{}});
+  vm.runInContext(fs.readFileSync(path.join(__dirname,'../caps.js'),'utf8'),context);
+  const textures=vm.runInContext('capTextures.map(texture=>texture.src)',context);
+  assert.equal(textures.length,20);
+  assert.equal(new Set(textures).size,20);
+});
+
 test('20 players have artwork, take turns and appear in final results',()=>{
   const elements=new Map();
   const element=id=>{
@@ -13,7 +21,7 @@ test('20 players have artwork, take turns and appear in final results',()=>{
     return elements.get(id);
   };
   const context=vm.createContext({CapPhysics:require('../physics.js'),
-    capTextures:Array.from({length:8},(_,i)=>({src:`cap-${i}`})),
+    capTextures:Array.from({length:20},(_,i)=>({src:`cap-${i}`})),
     document:{getElementById:element,body:element('body'),addEventListener(){}},
     window:{addEventListener(){},scrollTo(){}},devicePixelRatio:1,
     ResizeObserver:class{observe(){}},requestAnimationFrame(){}
@@ -23,6 +31,7 @@ test('20 players have artwork, take turns and appear in final results',()=>{
   assert.equal(vm.runInContext('count',context),20);
   assert.equal(element('plus').disabled,true);
   assert.equal((element('capPreview').innerHTML.match(/class="cap-number"/g)||[]).length,20);
+  assert.equal(new Set([...element('capPreview').innerHTML.matchAll(/src="(cap-\d+)"/g)].map(match=>match[1])).size,20);
   vm.runInContext(`start();
     for(let i=0;i<20;i++){
       turn=i;beginTurn();
